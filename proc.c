@@ -839,3 +839,34 @@ struct cgroup *proc_get_cgroup(void)
      cg = proc->cgroup;
   return cg;
 }
+
+/*
+* Show process status
+* Shows status of all processes if ran detached from a container
+* Shows status of processes inside container if ran attached to a container
+*/
+int
+cps151()
+{
+  struct proc *p;
+
+  // Enable interrupts on this processor.
+  sti();
+
+  // Iterate over process table and extract relevant fields' information
+  acquire(&ptable.lock);
+  cprintf("name \t pid \t state \t \t ppid \n");
+  for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
+    //int ppid = p->pid == 1 ? 0 : p->parent->pid; // ppid of init (pid==1) is defined as 0
+    if (p->state == RUNNING)
+      //cprintf("%s \t %d  \t RUNNING \t %d\n ", p->name, p->pid, ppid);
+      cprintf("%s \t %d  \t RUNNING \t %d\n ", p->name, 0, 0);
+    else //if (p->pid)// process exists
+      //cprintf("%s \t %d  \t SLEEPING \t %d\n ", p->name, p->pid, ppid);
+      cprintf("%s \t %d  \t SLEEPING \t %d\n ", p->name, 0, 0);
+  }
+
+  release(&ptable.lock);
+
+  return 151;
+}

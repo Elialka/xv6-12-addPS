@@ -43,6 +43,7 @@ int umount(const char*);
 int printmounts(void);
 int printdevices(void);
 int unshare(int);
+int cps151(void);
 
 // ulib.c
 int stat(const char*, struct stat*);

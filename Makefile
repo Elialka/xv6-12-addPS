@@ -214,6 +214,7 @@ UPROGS=\
         _demo_pid_ns \
         _demo_mount_ns \
         _ioctltests \
+        _ps \
 
 INTERNAL_DEV=\
 	internal_fs_a\
@@ -224,7 +225,7 @@ internal_fs_%: mkfs
 	dd if=/dev/zero of=$@ count=80
 	./mkfs $@ 1
 
-fs.img: mkfs README $(INTERNAL_DEV) _init #$(UPROGS) 
+fs.img: mkfs README $(INTERNAL_DEV) _init _ps #$(UPROGS) 
 	./mkfs fs.img 0 README $(UPROGS) $(INTERNAL_DEV)
 
 -include *.d
@@ -299,7 +300,7 @@ qemu-nox-gdb: fs.img xv6.img .gdbinit
 
 EXTRA=\
 	mkfs.c ulib.c user.h cat.c echo.c forktest.c grep.c kill.c\
-        ln.c ls.c mkdir.c mounttest.c rm.c stressfs.c usertests.c pidns_tests.c wc.c zombie.c\
+        ln.c ls.c mkdir.c mounttest.c rm.c stressfs.c usertests.c pidns_tests.c wc.c zombie.c ps.c\
         printf.c umalloc.c mount.c umount.c timer.c cpu.c cgroupstests.c ioctltests.c \
 	README dot-bochsrc *.pl toc.* runoff runoff1 runoff.list\
 	.gdbinit.tmpl gdbutil\

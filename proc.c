@@ -855,15 +855,14 @@ cps151()
 
   // Iterate over process table and extract relevant fields' information
   acquire(&ptable.lock);
-  cprintf("name \t pid \t state \t \t ppid \n");
+  cprintf("name \t pid \t state \t \t extpid \t ppid \t cputime \n");
   for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
-    //int ppid = p->pid == 1 ? 0 : p->parent->pid; // ppid of init (pid==1) is defined as 0
+    int extpid = p->pids[1].pid == 0 ? p->pids[0].pid : p->pids[1].pid; // the extpid is the last non zero value, nested containers are not supported, thus only first or second index can be last
+    int ppid = extpid == 1 ? 0 : p->parent->ns_pid; // ppid of init (extpid==1) is defined as 0
     if (p->state == RUNNING)
-      //cprintf("%s \t %d  \t RUNNING \t %d\n ", p->name, p->pid, ppid);
-      cprintf("%s \t %d  \t RUNNING \t %d\n ", p->name, 0, 0);
-    else //if (p->pid)// process exists
-      //cprintf("%s \t %d  \t SLEEPING \t %d\n ", p->name, p->pid, ppid);
-      cprintf("%s \t %d  \t SLEEPING \t %d\n ", p->name, 0, 0);
+      cprintf("%s \t %d  \t RUNNING \t %d \t \t %d \t %d\n ", p->name, p->ns_pid, extpid, ppid, p->cpu_time);
+    else if (p->ns_pid)// process exists
+      cprintf("%s \t %d  \t SLEEPING \t %d \t \t %d \t %d\n ", p->name, p->ns_pid, extpid, ppid, p->cpu_time);
   }
 
   release(&ptable.lock);

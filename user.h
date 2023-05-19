@@ -1,3 +1,5 @@
+// This file defines the functions that are called from the user space for system calls
+// Modified by Eli Alkhazov 208516351
 #ifndef XV6_USER_H
 #define XV6_USER_H
 

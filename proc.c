@@ -1,3 +1,5 @@
+// This file contains definitions of functions and macros for the project
+// Modified by Eli Alkhazov 208516351
 #include "types.h"
 #include "defs.h"
 #include "param.h"

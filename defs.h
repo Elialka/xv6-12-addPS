@@ -1,3 +1,5 @@
+// This file contains definitions of functions and macros for the project
+// Modified by Eli Alkhazov 208516351
 struct buf;
 struct context;
 struct file;

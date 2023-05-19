@@ -1,3 +1,5 @@
+// This file defines which system calls exist, and what are their corresponding system call ids
+// Modified by Eli Alkhazov 208516351
 #include "types.h"
 #include "defs.h"
 #include "param.h"

@@ -1,3 +1,5 @@
+// This file contains system call definitions
+// Modified by Eli Alkhazov 208516351
 #include "types.h"
 #include "x86.h"
 #include "defs.h"

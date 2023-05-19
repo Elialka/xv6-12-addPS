@@ -844,8 +844,7 @@ struct cgroup *proc_get_cgroup(void)
 
 /*
 * Show process status
-* Shows status of all processes if ran detached from a container
-* Shows status of processes inside container if ran attached to a container
+* Includes fields: name, pid, state, extpid, ppid, cputime
 */
 int
 cps151()

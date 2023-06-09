@@ -1,3 +1,5 @@
+// This file contains system call definitions
+// Modified by Eli Alkhazov 208516351
 #include "types.h"
 #include "x86.h"
 #include "defs.h"
@@ -252,4 +254,10 @@ sys_getmem(void) {
 int
 sys_kmemtest(void) {
   return kmemtest();
+}
+
+int
+sys_cps151(void)
+{
+    return cps151();
 }

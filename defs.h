@@ -1,3 +1,5 @@
+// This file contains definitions of functions and macros for the project
+// Modified by Eli Alkhazov 208516351
 struct buf;
 struct context;
 struct file;
@@ -181,6 +183,7 @@ int             wait(int*);
 void            wakeup(void*);
 void            yield(void);
 int             cgroup_move_proc(struct cgroup * cgroup, int pid);
+int             cps151(void);
 
 // swtch.S
 void            swtch(struct context**, struct context*);
